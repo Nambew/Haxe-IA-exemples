@@ -32,5 +32,9 @@ class MinerWife extends BaseGameEntity implements IBaseGameEntity{
 	override public function update():Void {
 		_stateMachine.update();
 	}
+
+	override public function handleMessage(msg:Telegram):Bool {
+		return false;
+	}
 	
 }

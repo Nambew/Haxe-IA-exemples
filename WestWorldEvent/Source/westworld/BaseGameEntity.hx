@@ -42,6 +42,10 @@ class BaseGameEntity
 	public function update():Void {
 		throw "<BaseGameEntity::update()> need to be override";
 	}
+
+	public function handleMessage(msg:Telegram):Bool {
+		throw "<BaseGameEntity::handleMessage()> need to be override";
+	}
 	
 	
 	

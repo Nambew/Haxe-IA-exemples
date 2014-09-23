@@ -114,5 +114,9 @@ class Miner extends BaseGameEntity implements IBaseGameEntity
 		
 		_stateMachine.update();
 	}
+
+	override public function handleMessage(msg:Telegram):Bool {
+		return false;
+	}
 	
 }
