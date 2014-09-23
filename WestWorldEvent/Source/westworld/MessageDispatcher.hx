@@ -1,6 +1,6 @@
 package westworld;
 
-import 
+import de.polygonal.ds.PriorityQueue;
 
 /**
  * ...
@@ -8,9 +8,10 @@ import
  */
 class MessageDispatcher{
 
-	private var _queue:
+	private var _queue:PriorityQueue<Telegram>;
+
 	public function new() {
-		
+		_queue = new PriorityQueue<Telegram>();
 	}
 	
 }

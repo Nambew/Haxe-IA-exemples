@@ -1,14 +1,16 @@
 -main ApplicationMain 
--lib openfl
--lib actuate
+-cp /usr/lib/haxe/lib/openfl/2,0,1/
+-D openfl=2.0.1
+-cp /usr/lib/haxe/lib/actuate/1,7,5/
+-D actuate=1.7.5
 -cp src
--D tools=1.2.9
--D fdb
+-cp /usr/lib/haxe/lib/openfl/2,0,1/backends/flash
+-cp /usr/lib/haxe/lib/openfl/2,0,1/backends/flash
+-D tools=1.5.7
+-D openfl-flash
 -D web
 -swf-version 11.2
 -swf bin/flash/bin/WestWorld1.swf
 -swf-header 800:480:60:000000
 -cp bin/flash/haxe
-#--remap nme:flash
---no-inline
 -debug
