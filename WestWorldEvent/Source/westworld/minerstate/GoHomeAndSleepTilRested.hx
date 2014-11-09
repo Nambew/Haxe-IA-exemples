@@ -2,6 +2,9 @@ package westworld.minerstate;
 
 import westworld.Miner;
 import westworld.State;
+import westworld.MessageDispatcher;
+import westworld.EntityManager;
+import westworld.MessageTypes;
 
 /**
  * ...
@@ -35,6 +38,8 @@ class GoHomeAndSleepTilRested extends State<Miner>{
 			trace( miner.getName() + " Walkin' home.");
 
             miner.changeLocation( LocationType.shack );
+
+            MessageDispatcher.instance.dispatchMessage( 0, miner.getId(), EntityManager.ENT_WIFE , MessageTypes.MsgHiHoneyImHome , ?extraInfos : Dynamic );
         }
 	}
 	
