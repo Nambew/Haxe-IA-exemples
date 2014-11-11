@@ -39,7 +39,7 @@ class GoHomeAndSleepTilRested extends State<Miner>{
 
             miner.changeLocation( LocationType.shack );
 
-            MessageDispatcher.instance.dispatchMessage( 0, miner.getId(), EntityManager.ENT_WIFE , MessageTypes.MsgHiHoneyImHome , ?extraInfos : Dynamic );
+            MessageDispatcher.instance.dispatchMessage( 0, miner.getId(), EntityManager.ENT_WIFE , MessageTypes.MsgHiHoneyImHome );
         }
 	}
 	
@@ -57,6 +57,23 @@ class GoHomeAndSleepTilRested extends State<Miner>{
 	
 	override public function exit(miner:Miner):Void {
 		trace( miner.getName() + " Leavin' the house.");
+	}
+
+	override public function onMessage( miner:Miner, msg:Telegram ):Bool {
+
+		trace( "Heu " + msg.message );
+		switch (msg.message) {
+
+			case MsgStewReady:
+				trace( "Message handle by " + miner.getName() );
+				trace( miner.getName() + ": Okay hun, ahm a-comin'!");
+				miner.getStateMachine().changeState( EatStew.instance );
+				
+				return true;
+
+			default:
+				return false;
+		}
 	}
 	
 }

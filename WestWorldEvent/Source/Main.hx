@@ -8,6 +8,7 @@ import flash.utils.Timer;
 import westworld.EntityManager;
 import westworld.Miner;
 import westworld.MinerWife;
+import westworld.MessageDispatcher;
 
 /**
  * ...
@@ -40,8 +41,7 @@ class Main extends Sprite
 		EntityManager.instance.register( _miner );
 		EntityManager.instance.register( _wife );
 		
-		
-		_timer = new Timer( 500, 20 );
+		_timer = new Timer( 1000, 20 );
 		_timer.addEventListener( TimerEvent.TIMER, onTimerStep );
 		_timer.addEventListener( TimerEvent.TIMER_COMPLETE, onTimerComplete );
 		_timer.start();
@@ -51,6 +51,10 @@ class Main extends Sprite
 	private function onTimerStep( evt:TimerEvent ):Void {
 		_miner.update();
 		_wife.update();
+
+		MessageDispatcher.instance.dispatchDelayedMessages();
+
+
 	}
 	
 	private function onTimerComplete( evt:TimerEvent ):Void {

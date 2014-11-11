@@ -16,8 +16,11 @@ class MessageDispatcher{
 		_queue = new PriorityQueue<Telegram>();
 	}
 
-	private function dicharge( entity:IBaseGameEntity ):Void {
-
+	private function dicharge( receiver:IBaseGameEntity, msg:Telegram ):Void {
+		if (!receiver.handleMessage(msg)) {
+            //telegram could not be handled
+            trace("\nMessage not handled");
+        }
 	}
 
 	public function dispatchMessage( delay:Float, sender:Int, receiver:Int, msg:MessageTypes, extraInfos:Dynamic = null ) {

@@ -1,12 +1,18 @@
 package westworld;
 
 import de.polygonal.ds.Comparable;
+import de.polygonal.ds.Prioritizable;
 /**
  * ...
  * @author Andre
  */
-class Telegram implements Comparable<Telegram>
+class Telegram 
+	implements Comparable<Telegram> 
+	implements Prioritizable
 {
+	public var priority:Float;
+    public var position:Int;
+
 	public var sender:Int;
 	public var receiver:Int;
 	public var message:MessageTypes;

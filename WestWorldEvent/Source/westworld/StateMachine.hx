@@ -60,5 +60,17 @@ class StateMachine<T>{
 	public function isInState( state:State<T> ):Bool {
 		return Type.getClassName( Type.getClass( this ) ) == Type.getClassName( Type.getClass(state) );
 	}
+
+	public function handleMessage( msg:westworld.Telegram ):Bool {
+		if( _currentState != null && _currentState.onMessage( _owner, msg ) ) {
+			return true;
+		}
+
+		if( _globalState != null && _globalState.onMessage( _owner, msg ) ) {
+			return true;
+		}
+
+		return false;
+	}
 	
 }

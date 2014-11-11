@@ -18,5 +18,11 @@ class State<T>
 	public function exit( miner:T ):Void {
 		
 	}
+
+	public function onMessage( entity:T, msg:Telegram ):Bool {
+		return false;
+	}
+
+
 	
 }

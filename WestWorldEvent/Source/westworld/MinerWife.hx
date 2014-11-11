@@ -10,6 +10,7 @@ class MinerWife extends BaseGameEntity implements IBaseGameEntity{
 
 	private var _currentLocation:LocationType;
 	private var _stateMachine:StateMachine<MinerWife>;
+	private var _cooking:Bool;
 	
 	public function new(id:Int) {
 		super(id);
@@ -18,11 +19,20 @@ class MinerWife extends BaseGameEntity implements IBaseGameEntity{
 		_stateMachine.setCurrentState( DoHouseWork.instance );
 		_stateMachine.setGlobalState( WifesGlobalState.instance );
 		_currentLocation = LocationType.shack;
+		_cooking = false;
 	}
 	
 	
 	public function getStateMachine():StateMachine<MinerWife> {
 		return _stateMachine;
+	}
+
+	public function cooking():Bool {
+		return _cooking;
+	}
+
+	public function setCooking( v:Bool ) {
+		_cooking = v;
 	}
 	
 	/* INTERFACE westworld.IBaseGameEntity */
@@ -34,7 +44,7 @@ class MinerWife extends BaseGameEntity implements IBaseGameEntity{
 	}
 
 	override public function handleMessage(msg:Telegram):Bool {
-		return false;
+		return _stateMachine.handleMessage( msg );
 	}
 	
 }

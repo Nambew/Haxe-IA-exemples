@@ -1,6 +1,9 @@
 package westworld.wifestate;
 
 import westworld.State;
+import westworld.MessageDispatcher;
+import westworld.EntityManager;
+import westworld.MessageTypes;
 
 class CookFood extends State<MinerWife> {
 
@@ -26,15 +29,36 @@ class CookFood extends State<MinerWife> {
 	/* INTERFACE westworld.State */
 	
 	override public function enter(wife:MinerWife):Void {
-		trace( wife.getName() + ": S");
+		if( !wife.cooking()) {
+			trace( wife.getName() + ": Puttin' the stew in the oven" );
+
+			wife.setCooking( true );
+
+            MessageDispatcher.instance.dispatchMessage( 1.5, wife.getId(), wife.getId(), MessageTypes.MsgStewReady );
+		}
 	}
 	
 	override public function execute(wife:MinerWife):Void {
-		trace( wife.getName() + ": Ahhhhhh! Sweet relief!" );
-		wife.getStateMachine().revertToPreviousState();
+		
 	}
 	
 	override public function exit(wife:MinerWife):Void {
-		trace( wife.getName() + " Leavin' the Jon.");
+		
+	}
+
+	override public function onMessage( wife:MinerWife, msg:Telegram ):Bool {
+		switch (msg.message) {
+
+			case MsgStewReady:
+				trace( "Message handle by " + wife.getName() );
+				trace( wife.getName() + ": Stew ready! Let's eat");
+				wife.setCooking( false );
+				MessageDispatcher.instance.dispatchMessage( 0, wife.getId(), EntityManager.ENT_MINER, MessageTypes.MsgStewReady );
+				wife.getStateMachine().changeState(DoHouseWork.instance);
+				return true;
+
+			default:
+				return false;
+		}
 	}
 }
