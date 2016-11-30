@@ -1,5 +1,6 @@
 bin/
 export/
+Export/
 .temp/
 
 .DS_Store

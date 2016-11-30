@@ -39,13 +39,15 @@ class MessageDispatcher{
 
 	public function dispatchDelayedMessages() {
 		var currentTime:Float = Date.now().getTime();
-
-		while( _queue.peek().dispatchTime < currentTime && _queue.peek().dispatchTime > 0 ) {
+		
+		trace( "_queue.size():" + _queue.size() );
+		while( _queue.size() > 0 && _queue.peek().dispatchTime < currentTime && _queue.peek().dispatchTime > 0 ) {
 			var telegram:Telegram = _queue.dequeue();
 			var receiverEntity:IBaseGameEntity = EntityManager.instance.getFromId( telegram.receiver );
 
 			dicharge( receiverEntity, telegram );
 		}
+		
 	}
 	
 }
